@@ -9,10 +9,11 @@ from flask import request
 @app.route("/log", methods=['GET','POST'])
 def hello():
     form = LoginForm()
-    if form.validate_on_submit():
-        result = form.TestString.data
-        print (result)
-
-    else:
-        result = 'not submitted'
-    return render_template('test.html', form=form, result=result)
+    surname = form.surname.data
+    name = form.name.data
+    meddle_name=form.Middle_name.data
+    internet=form.internet.data
+    mail=form.mail.data
+    delo=form.delo.data
+    print (name)
+    return render_template('test.html', form=form, result=1)
