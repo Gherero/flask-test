@@ -19,3 +19,6 @@ def login():
     if request.method == 'POST':
         print(request.form['username'])
     return render_template('test.html')
+@app.route('/p' )
+def profile():
+    return render_template('profile.html')
