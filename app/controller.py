@@ -1,20 +1,16 @@
 __author__ = 'gherero'
 from flask import render_template, session,redirect,url_for
 from app import app
-from .forms import LoginForm
-from .forms import NameForm
 from flask import request
-
+#from .forms import LoginForm
+#from .forms import NameForm
 
 
 @app.route("/log", methods=['GET','POST'])
 def hello():
-    #form = LoginForm()
-    #name=request.form['login']
-    #login=form.login.data
-    #passwd=form.passwrd.data
     if request.method == 'POST':
-        print(request.form['username'])
+        print(request.form['login'])
+        print(request.form['password'])
     #return 'login'
     return render_template('index.html')
 
