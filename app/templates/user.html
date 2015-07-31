@@ -121,9 +121,14 @@
        <div class="col-sm-10">
              <h1 class="">Sholmes</h1>
 
-          <button type="button" class="btn btn-success">Зарегистрироваться</button>
+           {% if not reg %}
+                <button type="button" class="btn btn-success">Зарегистрироваться</button>
+           {% else %}
+               <button type="button" class="btn btn-warning">Разрегистрироваться</button>
+           {% endif %}
 
           <!--<button type="button" class="btn btn-info">Send me a message</button>-->
+
 <br>
         </div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.rlsandbox.com/img/profile.jpg"></a>

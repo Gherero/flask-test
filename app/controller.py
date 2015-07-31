@@ -23,7 +23,8 @@ def login_test():
 
 @app.route('/u' )
 def user():
-    return render_template('user.html')
+    registration_status = 1
+    return render_template('user.html',reg=registration_status)
 
 @app.route('/p' )
 def profile():
