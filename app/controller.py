@@ -30,12 +30,12 @@ def user():
 def profile():
     return render_template('profile.html')
 
-@app.route('/o' )
+@app.route('/o')
 def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/s' )
+@app.route('/s')
 def staff():
     return render_template('staff.html')
 
