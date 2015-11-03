@@ -21,21 +21,21 @@ def login_test():
         print(request.form['username'])
     return render_template('test.html')
 
-@app.route('/u' )
+@app.route('/user' )
 def user():
     registration_status = 1
     return render_template('user.html',reg=registration_status)
 
-@app.route('/p' )
+@app.route('/profile' )
 def profile():
     return render_template('profile.html')
 
-@app.route('/o')
+@app.route('/logout')
 def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/s')
+@app.route('/staff')
 def staff():
     return render_template('staff.html')
 
