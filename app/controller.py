@@ -6,44 +6,36 @@ from flask import make_response
 from app import authentication_functions
 
 
-@app.route('/get')
+@app.route('/')
 def index():
-    username = request.cookies.get('username')
-    print(username)
-    if username== None:
-        print(authentication_functions.magic_id('test'))
-        return render_template('login.html')
+    session_id = request.cookies.get('session_id')
+    if session_id == None:
+        return redirect('login')
     else:
-        return render_template('profile.html')
+        return redirect('profile')
 
 
 
 
-@app.route('/', methods=['GET','POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
-    try:
-        session_id = request.cookies.get('sessio_id')
-        #if session_id == "test":
-            #return redirect(url_for(
-    except:
-        session_id=0
-    if session_id=='test':
-        return redirect(url_for('profile'))
+    session_id = request.cookies.get('session_id')
+    if not session_id==None:
+        username=authentication_functions.get_username(session_id)
     else:
         if request.method == 'POST':
-            print(request.form['login'])
+            login=request.form['login']
             passwd=request.form['password']
-            if passwd=='test':
-                    resp = make_response(render_template(...))
-                    resp.set_cookie('session_id', 'test')
 
-        #return 'login'
+            resp = make_response(render_template(...))
+            resp.set_cookie('session_id', 'test')
+
     return render_template('login.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/y', methods=['GET', 'POST'])
 def login_test():
     if request.method == 'POST':
-        print(request.form['username'])
+        request.form['username']
     return render_template('test.html')
 
 @app.route('/user' )

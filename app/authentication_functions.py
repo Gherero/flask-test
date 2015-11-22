@@ -3,6 +3,7 @@ from datetime import datetime
 import random
 import hashlib
 import redis
+from flask import request
 
 redis_db = redis.StrictRedis(host='localhost', port=6379,db=0)
 
@@ -14,7 +15,7 @@ def magic_id(username):
     unique_id = hashlib.sha512(string).hexdigest()
     return unique_id
 
-def get_session(session_id):
+def get_username(session_id):
     username=redis_db.get(session_id)
     return username
 
@@ -25,3 +26,8 @@ def set_session(username,session_id):
 
 def del_session(session_id):
     redis_db.delete(session_id)
+
+def valid_session():
+    session_id = request.cookies.get('session_id')
+    username = get_username(session_id)
+    return username
