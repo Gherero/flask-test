@@ -103,14 +103,17 @@
           </button>
           <a class="navbar-brand" href="#">Электронный журнал</a>
         </div>
+
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Моя страница</a></li>
-
             <li><a href="#about">Статистика</a></li>
             <li><a href="#staff">Сотрудники</a></li>
-            <li><a href="/log">Выход</a></li>
+            <li><a href="#settings">Настройки</a> </li>
           </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/Logout">Выход</a></li>
+            </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
  </nav><!-- /.navbar -->
@@ -141,12 +144,12 @@
             <!--left col-->
             <ul class="list-group">
                 <li class="list-group-item text-muted" contenteditable="false">Профиль</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Имя Фамилия</strong></span> Шерлок Холмс</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Работаю с</strong></span> 2.13.2014</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Последняя регистрация</strong></span> Сегодня</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Должность </strong></span> Администратор</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Телефон</strong></span> +322-223-322</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">e-mail </strong></span> holms@bakerstreet.us</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Имя Фамилия</strong></span> {{ middle_name }} </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Работаю с</strong></span> {{ working_with }}4</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Последняя регистрация</strong></span> {{ last_registration }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Должность </strong></span> {{ post }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Телефон</strong></span> {{ phone }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">e-mail </strong></span> {{ mail }}</li>
             </ul>
 
             <ul class="list-group">
