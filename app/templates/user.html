@@ -112,7 +112,7 @@
             <li><a href="#settings">Настройки</a> </li>
           </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/Logout">Выход</a></li>
+                <li><a href="/logout">Выход</a></li>
             </ul>
         </div><!-- /.nav-collapse -->
       </div><!-- /.container -->
@@ -122,16 +122,17 @@
 <div class="container target">
     <div class="row">
        <div class="col-sm-10">
-             <h1 class="">Sholmes</h1>
+             <h1 class="">{{ login }}</h1>
+       <form name="regform" method="post">
 
            {% if not reg %}
-                <button type="button" class="btn btn-success">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-success" name="regbuttun" value= "0">Зарегистрироваться</button>
            {% else %}
-               <button type="button" class="btn btn-warning">Разрегистрироваться</button>
+               <button type="submit" class="btn btn-warning" name="regbutton" value= "1">Разрегистрироваться</button>
            {% endif %}
 
           <!--<button type="button" class="btn btn-info">Send me a message</button>-->
-
+        </form>
 <br>
         </div>
       <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.rlsandbox.com/img/profile.jpg"></a>
@@ -149,7 +150,8 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Последняя регистрация</strong></span> {{ last_registration }}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Должность </strong></span> {{ post }}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Телефон</strong></span> {{ phone }}</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">e-mail </strong></span> {{ mail }}</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">e-mail</strong></span> {{ mail }}
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Уровень доступа</strong></span> {{ access_level }}</li>
             </ul>
 
             <ul class="list-group">

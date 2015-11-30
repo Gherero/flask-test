@@ -40,6 +40,14 @@
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
       </form>
+        {% if err  %}
+            <div class="panel panel-danger">
+                <div class="panel-heading">Ошибка!</div>
+                <div class="panel-body">
+                Не верное имя пользователя или пароль.
+            </div>
+        {% endif %}
+</div>
 
     </div> <!-- /container -->
 

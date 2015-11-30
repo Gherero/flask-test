@@ -13,21 +13,7 @@ def начало():
     return redirect('index')
 
 
-@app.route('/get_cookie')
-def get_cookie():
-    s=request.cookies.get('session_id')
-    print(s)
-    return s
 
-
-
-@app.route('/set_cookie')
-def cookie_insertion():
-    redirect_to_index = redirect('/index')
-    response = app.make_response(redirect_to_index )
-    s=authentication_functions.magic_id("test")
-    response.set_cookie('session_id',s)
-    return response
 
 @app.route('/index')
 def index():
@@ -42,6 +28,7 @@ def index():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    auth_err=1
     username = authentication_functions.valid_session()
     if not username == None:
         return redirect('user')
@@ -59,7 +46,54 @@ def login():
             authentication_functions.set_session(login,session_id)
             return response
 
-    return render_template('login.html')
+    return render_template('login.html',err=auth_err)
+
+
+
+@app.route('/user',methods=['GET', 'POST'] )
+def user():
+    registration_status = 0
+    if request.method == 'POST':
+        registration_status = 1
+        print(request.form['regbutton'])
+
+
+    return render_template('user.html',
+                           login='Holmes',
+                           reg=registration_status,
+                           middle_name='test',
+                           working_with= '2.3.2004',
+                           last_registration= '2.5.2014',
+                           post='boss',
+                           phone=322223554,
+                           mail='boss@baoos.ua',
+                           access_level='пользователь'
+                           )
+
+
+
+
+
+@app.route('/get_cookie')
+def get_cookie():
+    s=request.cookies.get('session_id')
+    print(s)
+    return s
+
+
+
+@app.route('/set_cookie')
+def cookie_insertion():
+    redirect_to_index = redirect('/index')
+    response = app.make_response(redirect_to_index )
+    s=authentication_functions.magic_id("test")
+    response.set_cookie('session_id',s)
+    return response
+
+
+
+
+
 
 
 
@@ -71,19 +105,6 @@ def login_test():
     if request.method == 'POST':
         request.form['username']
     return render_template('test.html')
-
-@app.route('/user',methods=['GET', 'POST'] )
-def user():
-    registration_status = 1
-    return render_template('user.html',
-                           reg=registration_status,
-                           middle_name='test',
-                           working_with= '2.3.2004',
-                           last_registration= '2.5.2014',
-                           post='boss',
-                           phone=322223554,
-                           mail='boss@baoos.ua'
-                           )
 
 
 @app.route('/profile' )

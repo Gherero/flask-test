@@ -1,6 +1,7 @@
 __author__ = 'gherero'
 from flask import Flask
 from peewee import *
+import datetime
 
 database = PostgresqlDatabase('journal')
 database.connect()
