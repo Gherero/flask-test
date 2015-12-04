@@ -126,9 +126,9 @@
        <form name="regform" method="post">
 
            {% if not reg %}
-                <button type="submit" class="btn btn-success" name="regbuttun" value= "0">Зарегистрироваться</button>
+                <button type="submit" class="btn btn-success" name="regbutton" value= "1">Зарегистрироваться</button>
            {% else %}
-               <button type="submit" class="btn btn-warning" name="regbutton" value= "1">Разрегистрироваться</button>
+               <button type="submit" class="btn btn-warning" name="regbutton" value= "0">Телепортация домой</button>
            {% endif %}
 
           <!--<button type="button" class="btn btn-info">Send me a message</button>-->
@@ -155,9 +155,14 @@
             </ul>
 
             <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge">14</span>
+                    <strong class="">Cras justo odio</strong>
+                </li>
                 <li class="list-group-item text-muted">Статистика <i class="fa fa-dashboard fa-1x"></i> </li>
 
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Количество опозданий</strong></span> 125</li>
+                <li class="list-group-item text-right">
+                    <span class="pull-left"><strong class="">Количество опозданий</strong></span>1</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Опозданий за месяц</strong></span> 13</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Количество пропусков</strong></span> 37</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Пропусков за месяц</strong></span> 78</li>

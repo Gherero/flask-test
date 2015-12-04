@@ -32,20 +32,21 @@
 
     <div class="container">
 
-      <form name="loginform" method="post" class="form-signin">
+    <form name="loginform" method="post" class="form-signin">
         <h2 class="form-signin-heading">Электронный журнал</h2>
         <label for="inputLogin" class="sr-only">Логин</label>
         <input name="login" type="login" id="inputLogin" class="form-control" placeholder="Логин" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-      </form>
+    </form>
         {% if err  %}
-            <div class="panel panel-danger">
-                <div class="panel-heading">Ошибка!</div>
-                <div class="panel-body">
-                Не верное имя пользователя или пароль.
+            <div class="alert alert-danger" role="alert">
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <span class="sr-only">Error:</span>
+                    Не верный логин или пароль!
             </div>
+
         {% endif %}
 </div>
 

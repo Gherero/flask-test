@@ -1,11 +1,10 @@
 __author__ = 'gherero'
 from flask import render_template,redirect,url_for
-from app import app
+from app import *
 from flask import request
 from flask import make_response
 from app import authentication_functions
-
-
+from app import post_gres_db
 
 
 @app.route('/')
@@ -18,6 +17,7 @@ def начало():
 @app.route('/index')
 def index():
     username = authentication_functions.valid_session()
+    print("index", username)
     if username == None:
         return redirect('/login')
     else:
@@ -28,7 +28,7 @@ def index():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    auth_err=1
+    auth_err=0
     username = authentication_functions.valid_session()
     if not username == None:
         return redirect('user')
@@ -41,10 +41,12 @@ def login():
 
             redirect_to_index = redirect('/index')
             response = app.make_response(redirect_to_index )
+            print ("/login",login)
             session_id = authentication_functions.magic_id(login)
-            response.set_cookie('session_id',session_id)
             authentication_functions.set_session(login,session_id)
+            response.set_cookie('session_id',session_id)
             return response
+
 
     return render_template('login.html',err=auth_err)
 
@@ -52,10 +54,20 @@ def login():
 
 @app.route('/user',methods=['GET', 'POST'] )
 def user():
-    registration_status = 0
+    username = authentication_functions.valid_session()
+    if username == None:
+        return redirect('login')
+
+    registration_status =0
     if request.method == 'POST':
-        registration_status = 1
-        print(request.form['regbutton'])
+        s_reg = int(request.form['regbutton'])
+
+        if s_reg == 1 :
+            registration_status=1
+        else:
+            registration_status=0
+        print(type(s_reg))
+        jour_db=post_gres_db.Time_registarion.create(username=username,registration_status=s_reg,created_date=datetime.now())
 
 
     return render_template('user.html',
@@ -67,7 +79,9 @@ def user():
                            post='boss',
                            phone=322223554,
                            mail='boss@baoos.ua',
-                           access_level='пользователь'
+                           access_level='пользователu',
+                           reg_button_name= "Зпрегистрироваться",
+                           unred_button_name="Телепортироваться домой"
                            )
 
 

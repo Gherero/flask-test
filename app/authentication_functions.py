@@ -36,7 +36,7 @@ def del_session():
 
 def valid_session():
     session_id = request.cookies.get('session_id')
-    print(session_id)
+    print("cookie_session_id" ,session_id)
     username = get_username(session_id)
     return username
 
