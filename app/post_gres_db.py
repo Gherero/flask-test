@@ -2,7 +2,8 @@ from app import *
 from datetime import datetime
 
 class User (Model):
-    username = CharField()                                                   #Логин в Active Directory(LDAP)
+    user_id=UUIDField(primary_key = True)
+    username = CharField(null=True)                                          #Логин в Active Directory(LDAP)
     name = CharField(null=True)                                              #Имя
     surname = CharField(null=True)                                           #Фамилия
     birthday = DateField(null=True)                                          #День рождения
@@ -21,6 +22,7 @@ class User (Model):
         database=db
 
 class Time_registarion(Model):
+    user_id=ForeignKeyField(User,'user_p_key')
     username = CharField()                                                      #Логин в Active Directory(LDAP)
     created_date = DateTimeField()                      #Дата создания сообщения
     registration_status = IntegerField()                                        #Регистрация = 1 разрегистрация = 0
@@ -28,3 +30,6 @@ class Time_registarion(Model):
 
     class Meta:
         database=db
+
+
+

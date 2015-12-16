@@ -47,7 +47,7 @@ def get_ldap_info(username):
                     check_names=True,
                     user='ODESSA\\kshypachov', password='a roza upala na lapu azora') as c:
 
-        c.search(search_base='CN=Users,DC=odessa,DC=gov,DC=ua',
+        c.search(search_base='DC=odessa,DC=gov,DC=ua',
                  search_filter='(&(samAccountName=' + username + '))',
                  search_scope=SUBTREE,
                  attributes=ALL_ATTRIBUTES,
@@ -55,4 +55,3 @@ def get_ldap_info(username):
 
     print(c.response_to_json())
     print(c.result)
-
