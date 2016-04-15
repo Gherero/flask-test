@@ -24,7 +24,7 @@ class User (Model):
 class Time_registarion(Model):
     user_id=ForeignKeyField(User,'user_p_key')
     username = CharField()                                                      #Логин в Active Directory(LDAP)
-    created_date = DateTimeField()                      #Дата создания сообщения
+    created_date = DateTimeField()                                              #Дата создания сообщения
     registration_status = IntegerField()                                        #Регистрация = 1 разрегистрация = 0
     delay_reason = TextField(null=True)                                         #Причина опоздания
 

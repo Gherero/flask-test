@@ -67,7 +67,7 @@ def user():
         else:
             registration_status=0
         print(type(s_reg))
-        jour_db=post_gres_db.Time_registarion.create(username=username,registration_status=s_reg,created_date=datetime.now())
+        jour_db=post_gres_db.Time_registarion.create(user_id='550e8400-e29b-41d4-a716-446655440000',username=username,registration_status=s_reg,created_date=datetime.now())
 
 
     return render_template('user.html',

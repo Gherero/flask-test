@@ -47,6 +47,8 @@ def get_ldap_info(username):
                     auto_bind=AUTO_BIND_NO_TLS,
                     read_only=True,
                     check_names=True,
+
+
                     user='ODESSA\\squid', password='printer') as c:
 
         c.search(search_base='DC=odessa,DC=gov,DC=ua',
