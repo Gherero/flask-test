@@ -4,7 +4,14 @@ from app import *
 from flask import request
 from flask import make_response
 from app import authentication_functions
-from app import post_gres_db
+from app import queries
+#from app import post_gres_db
+import mysql.connector
+
+cnx = mysql.connector.connect(user='test', password='test',
+                              host='127.0.0.1',
+                              database='journal')
+cursor=cnx.cursor(buffered=True)
 
 
 @app.route('/')
@@ -54,11 +61,24 @@ def login():
 
 @app.route('/user',methods=['GET', 'POST'] )
 def user():
+    global name, name
     username = authentication_functions.valid_session()
     if username == None:
         return redirect('login')
 
-    registration_status =0
+    registration_status = 0
+
+    cursor.execute(queries.query_user % (username.decode()))
+
+    (name, surname, work_from, pozition,phone, mail, access_level) = cursor.fetchone()
+
+    #print(cursor.fetchall(),"cur_fetchall")
+
+#    for (name, surname, work_from, pozition,phone, mail, access_level) in cursor:
+#        print("{}, {}, {}, {}, {}, {}, {}".format(name, surname, work_from, pozition,phone, mail, access_level))
+
+    print(name)
+
     if request.method == 'POST':
         s_reg = int(request.form['regbutton'])
 
@@ -67,19 +87,19 @@ def user():
         else:
             registration_status=0
         print(type(s_reg))
-        jour_db=post_gres_db.Time_registarion.create(user_id='550e8400-e29b-41d4-a716-446655440000',username=username,registration_status=s_reg,created_date=datetime.now())
-
+    #    jour_db=post_gres_db.Time_registarion.create(user_id='550e8400-e29b-41d4-a716-446655440000',username=username,registration_status=s_reg,created_date=datetime.now())
+    print(work_from)
 
     return render_template('user.html',
-                           login='Holmes',
+                           name_surname=name+" "+surname,
+                           login=username.decode(),
                            reg=registration_status,
-                           middle_name='test',
-                           working_with= '2.3.2004',
+                           working_with= work_from,
                            last_registration= '2.5.2014',
-                           post='boss',
-                           phone=322223554,
-                           mail='boss@baoos.ua',
-                           access_level='пользователu',
+                           post=pozition,
+                           phone=phone,
+                           mail=mail,
+                           access_level=access_level,
                            reg_button_name= "Зпрегистрироваться",
                            unred_button_name="Телепортироваться домой"
                            )

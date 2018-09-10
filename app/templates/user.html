@@ -122,7 +122,7 @@
 <div class="container target">
     <div class="row">
        <div class="col-sm-10">
-             <h1 class="">{{ login }}</h1>
+             <h1 class="">{{ name_surname }}</h1>
        <form name="regform" method="post">
 
            {% if not reg %}
@@ -145,8 +145,8 @@
             <!--left col-->
             <ul class="list-group">
                 <li class="list-group-item text-muted" contenteditable="false">Профиль</li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Имя Фамилия</strong></span> {{ middle_name }} </li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Работаю с</strong></span> {{ working_with }}4</li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Логин</strong></span> {{ login }} </li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Работаю с</strong></span> {{ working_with }}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Последняя регистрация</strong></span> {{ last_registration }}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Должность </strong></span> {{ post }}</li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Телефон</strong></span> {{ phone }}</li>

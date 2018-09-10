@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="kiro@10.0.10.1:22">
+    <serverData>
+      <paths name="Copy of project-level server 't'">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/kiro/python/flask-test" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="kiro@10.0.10.1:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/kiro/python/flask-test" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="t">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/kiro/python/flask-test" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

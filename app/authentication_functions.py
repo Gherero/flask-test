@@ -4,13 +4,13 @@ import random
 import hashlib
 import redis
 from flask import request
-from ldap3 import Server, \
-    Connection, \
-    AUTO_BIND_NO_TLS, \
-    SUBTREE, \
-    ALL_ATTRIBUTES
+#from ldap3 import Server, \
+#    Connection, \
+#    AUTO_BIND_NO_TLS, \
+#    SUBTREE, \
+#    ALL_ATTRIBUTES
 
-
+session_ttl=3600
 
 redis_db = redis.StrictRedis(host='localhost', port=6379,db=0)
 
@@ -31,10 +31,8 @@ def get_username(session_id):
     return username
 
 def set_session(username,session_id):
-
-
     redis_db.set(session_id,username)
-    redis_db.expire(session_id,1800)
+    redis_db.expire(session_id,session_ttl)
 
 def del_session():
     session_id = request.cookies.get('session_id')

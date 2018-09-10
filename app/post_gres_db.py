@@ -19,7 +19,7 @@ class User (Model):
     end_time_work_m = IntegerField(null=True)
 
     class Meta:
-        database=db
+#        database=db
 
 class Time_registarion(Model):
     user_id=ForeignKeyField(User,'user_p_key')
@@ -29,7 +29,7 @@ class Time_registarion(Model):
     delay_reason = TextField(null=True)                                         #Причина опоздания
 
     class Meta:
-        database=db
+ #       database=db
 
 
 
