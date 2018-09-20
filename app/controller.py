@@ -6,13 +6,35 @@ from flask import make_response
 from app import authentication_functions
 from app import queries
 #from app import post_gres_db
+from datetime import datetime
+from datetime import date
 import mysql.connector
 
-cnx = mysql.connector.connect(user='test', password='test',
-                              host='127.0.0.1',
-                              database='journal')
-cursor=cnx.cursor(buffered=True)
 
+
+def connect_db():
+    cnx = mysql.connector.connect(user='test', password='test',
+                                  host='127.0.0.1',
+                                  database='journal')
+
+    # cursor=cnx.cursor(buffered=True)
+    cursor = cnx.cursor(buffered=False)
+    return cnx, cursor
+
+def disconnect_db(cnx,cursor):
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+
+
+"""
+@app.after_request
+def disconect_db():
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+"""
 
 @app.route('/')
 def начало():
@@ -61,41 +83,42 @@ def login():
 
 @app.route('/user',methods=['GET', 'POST'] )
 def user():
-    global name, name
+#    global name, name
+    cnx, cursor = connect_db()
+
     username = authentication_functions.valid_session()
     if username == None:
         return redirect('login')
 
-    registration_status = 0
+    #registration_status = 0
 
     cursor.execute(queries.query_user % (username.decode()))
-
     (name, surname, work_from, pozition,phone, mail, access_level) = cursor.fetchone()
 
-    #print(cursor.fetchall(),"cur_fetchall")
+    cursor.execute(queries.get_registration_status % (username.decode()))
+    registration_status, = cursor.fetchone()
 
-#    for (name, surname, work_from, pozition,phone, mail, access_level) in cursor:
-#        print("{}, {}, {}, {}, {}, {}, {}".format(name, surname, work_from, pozition,phone, mail, access_level))
-
-    print(name)
+    cursor.execute(queries.get_last_registration % (username.decode()))
+    last_registration_time, = cursor.fetchone()
+    print(last_registration_time.date())
 
     if request.method == 'POST':
         s_reg = int(request.form['regbutton'])
-
         if s_reg == 1 :
             registration_status=1
         else:
             registration_status=0
-        print(type(s_reg))
-    #    jour_db=post_gres_db.Time_registarion.create(user_id='550e8400-e29b-41d4-a716-446655440000',username=username,registration_status=s_reg,created_date=datetime.now())
-    print(work_from)
+        set_reg = (username.decode(), datetime.now(), registration_status)
+        cursor.execute(queries.time_tracking,set_reg)
+
+    disconnect_db(cnx,cursor)
 
     return render_template('user.html',
                            name_surname=name+" "+surname,
                            login=username.decode(),
                            reg=registration_status,
                            working_with= work_from,
-                           last_registration= '2.5.2014',
+                           last_registration= last_registration_time.date(),
                            post=pozition,
                            phone=phone,
                            mail=mail,
