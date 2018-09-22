@@ -5,10 +5,12 @@ from flask import request
 from flask import make_response
 from app import authentication_functions
 from app import queries
+from app import time_count
 #from app import post_gres_db
 from datetime import datetime
 from datetime import date
 import mysql.connector
+
 
 
 
@@ -75,6 +77,8 @@ def login():
             authentication_functions.set_session(login,session_id)
             response.set_cookie('session_id',session_id)
             return response
+        else:
+            auth_err = 1
 
 
     return render_template('login.html',err=auth_err)
@@ -102,6 +106,13 @@ def user():
     last_registration_time, = cursor.fetchone()
     print(last_registration_time.date())
 
+    cursor.execute(queries.get_time_reg_today % date.today())
+    time_reg_today = cursor.fetchall()
+    hourse_on_work_today = time_count.count(time_reg_today)
+    print(time_reg_today)
+    print(type(time_reg_today))
+    print(len(time_reg_today))
+
     if request.method == 'POST':
         s_reg = int(request.form['regbutton'])
         if s_reg == 1 :
@@ -114,17 +125,17 @@ def user():
     disconnect_db(cnx,cursor)
 
     return render_template('user.html',
-                           name_surname=name+" "+surname,
-                           login=username.decode(),
-                           reg=registration_status,
-                           working_with= work_from,
-                           last_registration= last_registration_time.date(),
-                           post=pozition,
-                           phone=phone,
-                           mail=mail,
-                           access_level=access_level,
-                           reg_button_name= "Зпрегистрироваться",
-                           unred_button_name="Телепортироваться домой"
+                           name_surname = name+" "+surname,
+                           login = username.decode(),
+                           reg = registration_status,
+                           working_with = work_from,
+                           last_registration = last_registration_time.date(),
+                           post = pozition,
+                           phone = phone,
+                           mail = mail,
+                           access_level = access_level,
+                           reg_button_name = "Зарегистрироваться",
+                           unred_button_name = "Телепортироваться домой"
                            )
 
 
@@ -134,7 +145,7 @@ def user():
 @app.route('/get_cookie')
 def get_cookie():
     s=request.cookies.get('session_id')
-    print(s)
+#    print(s)
     return s
 
 
